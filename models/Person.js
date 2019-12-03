@@ -11,3 +11,7 @@ const PersonSchema = new Schema({
     stories: [{ type: Schema.Types.ObjectId, ref: 'Story' }],
     characters: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
+
+const Person = mongoose.model('Person', PersonSchema);
+
+module.exports = Person;

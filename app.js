@@ -10,13 +10,20 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const compression = require('compression');
+const hbs = require( 'express-handlebars');
 
 const app = express();
+const globalErrHandler = require('./controllers/error.controller');
 const indexRouter = require('./routes/index');
 
 // view engine setup
+app.engine( 'hbs', hbs( {
+  extname: '.hbs',
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials/'
+}));
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'hbs');
 
 // setup static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -74,5 +81,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+app.use(globalErrHandler);
 
 module.exports = app;

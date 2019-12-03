@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-
 const storySchema = new Schema({
     title: String,
     author: { type: Schema.Types.ObjectId, ref: 'Person' },
@@ -24,3 +22,7 @@ const storySchema = new Schema({
         },
     }]
 }, { timestamps: true });
+
+const Story = mongoose.model('Story', storySchema);
+
+module.exports = Story;

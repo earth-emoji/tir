@@ -9,3 +9,7 @@ const CharacterSchema = new Schema({
     author: { type: Schema.Types.ObjectId, ref: 'Person', },
     stories: [{ type: Schema.Types.ObjectId, ref: 'Story', }]
 }, { timestamps: true });
+
+const Character = mongoose.model('Character', CharacterSchema);
+
+module.exports = Character;
